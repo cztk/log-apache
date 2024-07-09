@@ -1,0 +1,2 @@
+- pipeline.id: apache_access_log
+  path.config: "/etc/logstash/conf.d/apache/access_log.conf"
