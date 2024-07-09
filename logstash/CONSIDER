@@ -1,0 +1,5 @@
+# logstash uses more threads / cpu when using multi pipeline
+# consider having the code in one pipeline if it works for you
+# consider using geoip module in either logstash and anonymise client.ip
+# before indexing in elasticsearch
+# or let elasticsearch handle this.
