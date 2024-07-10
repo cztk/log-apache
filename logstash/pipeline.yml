@@ -1,2 +1,15 @@
-- pipeline.id: apache_access_log
+- pipeline.id: beats-server
+  config.string: |
+    input { beats { port => 1044 } }
+    output {
+        if "apache_access" in [tags] {
+          pipeline { send_to => apache_access }
+        } else if "apache_error" in [tags] {
+          pipeline { send_to => apache_error }
+        }
+    }
+
+- pipeline.id: apache_access
   path.config: "/etc/logstash/conf.d/apache/access_log.conf"
+- pipeline.id: apache_error
+  path.config: "/etc/logstash/conf.d/apache/error_log.conf"
