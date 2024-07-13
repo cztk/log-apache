@@ -1,0 +1,39 @@
+if
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": "none"
+  }
+}
+GET _cat/nodes?v
+
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.exclude._ip": ""
+  }
+}
+
+and or
+
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.exclude._id": ""
+  }
+}
+
+GET _cat/recovery?v
+GET _cat/recovery?v&active_only=true
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": "all"
+  }
+}
+
+does not remove a node,
+check
+GET _cluster/settings?flat_settings
+if transient settings is present, either update transient setting
+or remove transient settings to make persistent work
